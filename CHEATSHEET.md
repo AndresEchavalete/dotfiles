@@ -119,6 +119,16 @@ LazyVim te da la experiencia completa de IntelliJ sin tocar el mouse.
 | `]d` / `[d` | Ir al siguiente / anterior error o advertencia en el archivo | Next Highlighted Error (`F2`) |
 | `Espacio` + `x` + `x` | Mostrar lista de todos los problemas/errores del proyecto | Problems View (`Alt+6`) |
 
+### 👁️ Interfaz, Linter y Ortografía (UI Toggles)
+
+LazyVim tiene un menú dedicado a apagar y encender cosas molestas de la interfaz visual. Todos empiezan con `Espacio` + `u` (de UI).
+
+| Atajo | Acción | ¿Para qué sirve? |
+| :--- | :--- | :--- |
+| `Espacio` + `u` + `d` | **Activar/Desactivar Diagnostics** (Errores visuales) | Oculta los mensajes naranjas/rojos del linter (ej. Markdownlint) mientras escribes. |
+| `Espacio` + `u` + `s` | **Activar/Desactivar Corrector** (Spellcheck) | Quita la línea ondulada debajo de palabras en español. |
+| `Espacio` + `u` + `w` | Activar/Desactivar Word Wrap | Ajusta líneas largas para que quepan en la pantalla sin hacer scroll lateral. |
+
 ### 🌿 Git (Lazygit)
 
 | Atajo | Acción |
