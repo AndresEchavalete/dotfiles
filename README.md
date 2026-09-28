@@ -29,6 +29,15 @@ Por ejemplo, si la configuración de Neovim vive en `~/.config/nvim`, en este re
 
 *(Nota: Si Stow lanza un error diciendo que un archivo ya existe, debes borrar o mover el archivo original en tu `$HOME` antes de ejecutar el comando).*
 
+### ⚠️ Requisitos previos y Plugins (Ej: Neovim)
+
+**Importante:** Los dotfiles solo enlazan la *configuración* de las herramientas, pero **NO instalan el software ni los plugins** por ti. 
+
+Para el caso de **Neovim** (que usa LazyVim en esta configuración):
+1. **Debes instalar Neovim previamente** en el nuevo entorno (se recomienda versión >= 0.9.0).
+2. También necesitarás algunas dependencias comunes: `git`, `make`, `gcc` (o build-essential), `ripgrep`, `fd-find` y `npm` (para los servidores de lenguaje / LSPs).
+3. **¿Dónde están los plugins?** No se guardan en este repositorio. Una vez que hayas hecho `stow nvim`, simplemente **abre Neovim** (`nvim` en la terminal) y el gestor de paquetes (Lazy) se encargará de descargar e instalar todos los plugins automáticamente en tu nueva máquina.
+
 ## 📦 Cómo agregar un nuevo paquete a los dotfiles
 
 Si quieres empezar a versionar la configuración de una nueva herramienta (por ejemplo, tus agentes de Antigravity), sigue estos pasos:
