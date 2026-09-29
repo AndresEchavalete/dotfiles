@@ -1,0 +1,270 @@
+{
+  "editorMode": "vim",
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "context7@claude-plugins-official": true,
+    "engram@engram": true,
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "repo": "JuliusBrussee/caveman",
+        "source": "github"
+      }
+    },
+    "engram": {
+      "source": {
+        "repo": "Gentleman-Programming/engram",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "$HOME/.claude/skills/gstack/hosts/claude/hooks/question-log-hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "(AskUserQuestion|mcp__.*__AskUserQuestion)"
+      },
+      {
+        "hooks": [
+          {
+            "command": "$HOME/.claude/skills/gstack/hosts/claude/hooks/auq-error-fallback-hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "(AskUserQuestion|mcp__.*__AskUserQuestion)"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "$HOME/.claude/hooks/rtk-rewrite.sh",
+            "type": "command"
+          },
+          {
+            "command": "$HOME/.claude/hooks/git-guard.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "$HOME/.claude/skills/gstack/hosts/claude/hooks/question-preference-hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "(AskUserQuestion|mcp__.*__AskUserQuestion)"
+      },
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai sdd-preflight-hook --agent claude-code",
+            "timeout": 30,
+            "type": "command"
+          }
+        ],
+        "matcher": "Agent"
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      },
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai review stop-hook --agent claude-code",
+            "timeout": 30,
+            "type": "command"
+          }
+        ],
+        "matcher": "startup|resume|clear|compact"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "$HOME/.claude/skills/gstack/hosts/claude/hooks/timeline-stop-hook",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai review stop-hook --agent claude-code",
+            "timeout": 60,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "gentle-ai telemetry runtime claude --json",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "command": "jq -c '{ts: now, session_id, agent_id, agent_type, event: \"start\"}' >> $HOME/.claude/agent-activity.jsonl",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "command": "jq -c '{ts: now, session_id, agent_id, agent_type, event: \"stop\"}' >> $HOME/.claude/agent-activity.jsonl",
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "gentle-ai telemetry runtime claude --json",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai skill-registry refresh --quiet --no-gitignore --cwd \"${CLAUDE_PROJECT_DIR:-$PWD}\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "codegraph prompt-hook",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "language": "Español",
+  "model": "claude-opus-4-8",
+  "outputStyle": "Gentleman",
+  "permissions": {
+    "allow": [
+      "mcp__plugin_engram_engram__mem_capture_passive",
+      "mcp__plugin_engram_engram__mem_context",
+      "mcp__plugin_engram_engram__mem_get_observation",
+      "mcp__plugin_engram_engram__mem_save",
+      "mcp__plugin_engram_engram__mem_save_prompt",
+      "mcp__plugin_engram_engram__mem_search",
+      "mcp__plugin_engram_engram__mem_session_end",
+      "mcp__plugin_engram_engram__mem_session_start",
+      "mcp__plugin_engram_engram__mem_session_summary",
+      "mcp__plugin_engram_engram__mem_suggest_topic_key",
+      "mcp__plugin_engram_engram__mem_update",
+      "mcp__codegraph__*",
+      "mcp__engram__mem_capture_passive",
+      "mcp__engram__mem_compare",
+      "mcp__engram__mem_context",
+      "mcp__engram__mem_current_project",
+      "mcp__engram__mem_doctor",
+      "mcp__engram__mem_get_observation",
+      "mcp__engram__mem_judge",
+      "mcp__engram__mem_pin",
+      "mcp__engram__mem_review",
+      "mcp__engram__mem_save",
+      "mcp__engram__mem_save_prompt",
+      "mcp__engram__mem_search",
+      "mcp__engram__mem_session_end",
+      "mcp__engram__mem_session_start",
+      "mcp__engram__mem_session_summary",
+      "mcp__engram__mem_suggest_topic_key",
+      "mcp__engram__mem_unpin",
+      "mcp__engram__mem_update",
+      "mcp__plugin_engram_engram__mem_compare",
+      "mcp__plugin_engram_engram__mem_current_project",
+      "mcp__plugin_engram_engram__mem_doctor",
+      "mcp__plugin_engram_engram__mem_judge",
+      "mcp__plugin_engram_engram__mem_pin",
+      "mcp__plugin_engram_engram__mem_review",
+      "mcp__plugin_engram_engram__mem_unpin"
+    ],
+    "defaultMode": "bypassPermissions",
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(sudo rm -rf ~)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Read(.ssh/*)",
+      "Edit(.ssh/*)",
+      "Read(.credentials/*)",
+      "Edit(.credentials/*)",
+      "Read(Library/Keychains/*)",
+      "Edit(Library/Keychains/*)",
+      "Read(.aws/credentials)",
+      "Edit(.aws/credentials)",
+      "Read(.config/gh/hosts.yml)",
+      "Edit(.config/gh/hosts.yml)",
+      "Read(**/*.pem)",
+      "Edit(**/*.pem)",
+      "Read(**/*.key)",
+      "Edit(**/*.key)",
+      "Read(**/secrets/*)",
+      "Edit(**/secrets/*)"
+    ]
+  },
+  "skipAutoPermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true,
+  "statusLine": {
+    "command": "bash $HOME/.claude/statusline-command.sh",
+    "type": "command"
+  },
+  "theme": "custom:gentleman",
+  "tui": "fullscreen"
+}
