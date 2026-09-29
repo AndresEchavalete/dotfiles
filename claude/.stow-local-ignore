@@ -1,0 +1,5 @@
+# Keep these at the package root — do NOT symlink them into $HOME.
+sync\.sh
+git-pre-commit-guard\.sh
+README\.md
+\.stow-local-ignore

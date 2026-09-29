@@ -1,1 +1,47 @@
 mcp_config.json
+
+# ── Global secret/credential safety net (any package) ──────────────
+**/*oauth*token*
+**/*.credentials.json
+**/*.overlay.json
+**/settings.local.json
+**/*token
+**/*secret*
+**/*.pem
+**/*.key
+
+# ── Claude Code (claude package) ───────────────────────────────────
+claude/.claude/projects/
+claude/.claude/history.jsonl
+claude/.claude/agent-activity.jsonl
+claude/.claude/telemetry/
+claude/.claude/sessions/
+claude/.claude/tasks/
+claude/.claude/feedback/
+claude/.claude/skills/
+
+# ── agy / Antigravity / Gemini (agy package) ───────────────────────
+agy/.gemini/config/
+agy/.gemini/antigravity-cli/antigravity-oauth-token
+agy/.gemini/antigravity-cli/*.db
+agy/.gemini/antigravity-cli/*.db-*
+agy/.gemini/antigravity-cli/history.jsonl
+agy/.gemini/antigravity-cli/cli.log
+agy/.gemini/antigravity-cli/installation_id
+agy/.gemini/antigravity-cli/*.timestamp
+agy/.gemini/antigravity-cli/*.pb
+agy/.gemini/antigravity-cli/*.pbtxt
+agy/.gemini/antigravity-cli/annotations/
+agy/.gemini/antigravity-cli/bin/
+agy/.gemini/antigravity-cli/brain/
+agy/.gemini/antigravity-cli/builtin/
+agy/.gemini/antigravity-cli/cache/
+agy/.gemini/antigravity-cli/conversations/
+agy/.gemini/antigravity-cli/crashes/
+agy/.gemini/antigravity-cli/implicit/
+agy/.gemini/antigravity-cli/knowledge/
+agy/.gemini/antigravity-cli/log/
+agy/.gemini/antigravity-cli/mcp/
+agy/.gemini/antigravity-cli/presence/
+agy/.gemini/antigravity-cli/updater/
+agy/.agents/skills/

@@ -1,0 +1,3 @@
+# Keep these at the package root — do NOT symlink them into $HOME.
+README\.md
+\.stow-local-ignore
