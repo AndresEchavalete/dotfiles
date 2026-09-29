@@ -44,6 +44,10 @@ export OTEL_LOGS_EXPORTER=otlp
 ln -sf ../../claude/git-pre-commit-guard.sh .git/hooks/pre-commit
 ```
 
+Git hooks live in `.git/hooks/` — they are **not** versioned or pushed, so they
+stay local to each clone. Run the symlink command once per host (after cloning)
+to enable the guard there.
+
 ## Plugins & skills
 
 Not vendored — reinstall via `.claude/manifest/plugins.json` and the commands in
